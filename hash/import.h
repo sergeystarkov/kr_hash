@@ -2,6 +2,7 @@
 #define IMPORT_H
 
 #include <QObject>
+#include <QFile>
 
 class import : public QObject
 {
@@ -12,6 +13,8 @@ public:
 signals:
 
 public slots:
+    bool loadFromFile(QString path, QVector<QString> *array); //Записывает массив из файла
+//    bool loadFromFile(QString path, QString *array); //Записывает массив из файла
 };
 
 #endif // IMPORT_H

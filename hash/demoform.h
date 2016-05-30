@@ -4,7 +4,8 @@
 
 #include <QWidget>
 
-#include <QTimer>
+#include "import.h"
+#include "hash.h"
 
 namespace Ui {
 class demoForm;
@@ -24,8 +25,19 @@ public slots:
 private slots:    
 
 
+    void on_importButton_clicked();
+
+    void on_genHash_clicked();
+
 private:
     Ui::demoForm *ui;
+
+    //Импорт массива из файла
+    void importArray();
+    //QString array[];
+
+    import imp;
+    hash hashFoo;
 
 signals:
     void messageBox(QString);

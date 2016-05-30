@@ -57,7 +57,9 @@ SOURCES       = ../hash/main.cpp \
 		../hash/main_window.cpp \
 		../hash/sql.cpp \
 		../hash/testform.cpp \
-		../hash/theoryform.cpp moc_author.cpp \
+		../hash/theoryform.cpp \
+		../hash/hash.cpp \
+		../hash/import.cpp moc_author.cpp \
 		moc_demoform.cpp \
 		moc_dialogfio.cpp \
 		moc_fio.cpp \
@@ -65,7 +67,9 @@ SOURCES       = ../hash/main.cpp \
 		moc_main_window.cpp \
 		moc_sql.cpp \
 		moc_testform.cpp \
-		moc_theoryform.cpp
+		moc_theoryform.cpp \
+		moc_hash.cpp \
+		moc_import.cpp
 OBJECTS       = main.o \
 		author.o \
 		demoform.o \
@@ -76,6 +80,8 @@ OBJECTS       = main.o \
 		sql.o \
 		testform.o \
 		theoryform.o \
+		hash.o \
+		import.o \
 		moc_author.o \
 		moc_demoform.o \
 		moc_dialogfio.o \
@@ -84,7 +90,9 @@ OBJECTS       = main.o \
 		moc_main_window.o \
 		moc_sql.o \
 		moc_testform.o \
-		moc_theoryform.o
+		moc_theoryform.o \
+		moc_hash.o \
+		moc_import.o
 DIST          = ../../../Qt5.6.0/5.6/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.6.0/5.6/gcc_64/mkspecs/common/unix.conf \
 		../../../Qt5.6.0/5.6/gcc_64/mkspecs/common/linux.conf \
@@ -227,7 +235,9 @@ DIST          = ../../../Qt5.6.0/5.6/gcc_64/mkspecs/features/spec_pre.prf \
 		../hash/main_window.h \
 		../hash/sql.h \
 		../hash/testform.h \
-		../hash/theoryform.h ../hash/main.cpp \
+		../hash/theoryform.h \
+		../hash/hash.h \
+		../hash/import.h ../hash/main.cpp \
 		../hash/author.cpp \
 		../hash/demoform.cpp \
 		../hash/dialogfio.cpp \
@@ -236,7 +246,9 @@ DIST          = ../../../Qt5.6.0/5.6/gcc_64/mkspecs/features/spec_pre.prf \
 		../hash/main_window.cpp \
 		../hash/sql.cpp \
 		../hash/testform.cpp \
-		../hash/theoryform.cpp
+		../hash/theoryform.cpp \
+		../hash/hash.cpp \
+		../hash/import.cpp
 QMAKE_TARGET  = hash
 DESTDIR       = 
 TARGET        = hash
@@ -553,8 +565,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../hash/author.h ../hash/demoform.h ../hash/dialogfio.h ../hash/fio.h ../hash/historyform.h ../hash/main_window.h ../hash/sql.h ../hash/testform.h ../hash/theoryform.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../hash/main.cpp ../hash/author.cpp ../hash/demoform.cpp ../hash/dialogfio.cpp ../hash/fio.cpp ../hash/historyform.cpp ../hash/main_window.cpp ../hash/sql.cpp ../hash/testform.cpp ../hash/theoryform.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../hash/author.h ../hash/demoform.h ../hash/dialogfio.h ../hash/fio.h ../hash/historyform.h ../hash/main_window.h ../hash/sql.h ../hash/testform.h ../hash/theoryform.h ../hash/hash.h ../hash/import.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../hash/main.cpp ../hash/author.cpp ../hash/demoform.cpp ../hash/dialogfio.cpp ../hash/fio.cpp ../hash/historyform.cpp ../hash/main_window.cpp ../hash/sql.cpp ../hash/testform.cpp ../hash/theoryform.cpp ../hash/hash.cpp ../hash/import.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../hash/mainwindow.ui ../hash/author.ui ../hash/demoform.ui ../hash/dialogfio.ui ../hash/fio.ui ../hash/historyform.ui ../hash/testform.ui ../hash/theoryform.ui $(DISTDIR)/
 
 
@@ -578,9 +590,9 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_author.cpp moc_demoform.cpp moc_dialogfio.cpp moc_fio.cpp moc_historyform.cpp moc_main_window.cpp moc_sql.cpp moc_testform.cpp moc_theoryform.cpp
+compiler_moc_header_make_all: moc_author.cpp moc_demoform.cpp moc_dialogfio.cpp moc_fio.cpp moc_historyform.cpp moc_main_window.cpp moc_sql.cpp moc_testform.cpp moc_theoryform.cpp moc_hash.cpp moc_import.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_author.cpp moc_demoform.cpp moc_dialogfio.cpp moc_fio.cpp moc_historyform.cpp moc_main_window.cpp moc_sql.cpp moc_testform.cpp moc_theoryform.cpp
+	-$(DEL_FILE) moc_author.cpp moc_demoform.cpp moc_dialogfio.cpp moc_fio.cpp moc_historyform.cpp moc_main_window.cpp moc_sql.cpp moc_testform.cpp moc_theoryform.cpp moc_hash.cpp moc_import.cpp
 moc_author.cpp: ../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QWidget \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qwidget.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qwindowdefs.h \
@@ -795,9 +807,10 @@ moc_demoform.cpp: ../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QWidget \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QTimer \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtimer.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
+		../hash/import.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QObject \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QFile \
+		../hash/hash.h \
 		../hash/demoform.h
 	/home/sergey/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/home/sergey/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/home/sergey/git/kr_hash/hash -I/home/sergey/Qt5.6.0/5.6/gcc_64/include -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebEngineCore -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtQuick -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtGui -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtSql -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtQml -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtNetwork -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebChannel -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtCore -I. ../hash/demoform.h -o moc_demoform.cpp
 
@@ -1521,6 +1534,126 @@ moc_theoryform.cpp: ../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QWidget \
 		../hash/theoryform.h
 	/home/sergey/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/home/sergey/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/home/sergey/git/kr_hash/hash -I/home/sergey/Qt5.6.0/5.6/gcc_64/include -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebEngineCore -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtQuick -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtGui -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtSql -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtQml -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtNetwork -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebChannel -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtCore -I. ../hash/theoryform.h -o moc_theoryform.cpp
 
+moc_hash.cpp: ../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QObject \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfeatures.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobject_impl.h \
+		../hash/hash.h
+	/home/sergey/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/home/sergey/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/home/sergey/git/kr_hash/hash -I/home/sergey/Qt5.6.0/5.6/gcc_64/include -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebEngineCore -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtQuick -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtGui -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtSql -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtQml -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtNetwork -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebChannel -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtCore -I. ../hash/hash.h -o moc_hash.cpp
+
+moc_import.cpp: ../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QObject \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfeatures.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QFile \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfile.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfiledevice.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qiodevice.h \
+		../hash/import.h
+	/home/sergey/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/home/sergey/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/home/sergey/git/kr_hash/hash -I/home/sergey/Qt5.6.0/5.6/gcc_64/include -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebEngineCore -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtQuick -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtGui -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtSql -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtQml -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtNetwork -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtWebChannel -I/home/sergey/Qt5.6.0/5.6/gcc_64/include/QtCore -I. ../hash/import.h -o moc_import.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_uic_make_all: ui_mainwindow.h ui_author.h ui_demoform.h ui_dialogfio.h ui_fio.h ui_historyform.h ui_testform.h ui_theoryform.h
@@ -1928,44 +2061,11 @@ author.o: ../hash/author.cpp ../hash/author.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtimer.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		ui_author.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVariant \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QAction \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QButtonGroup \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHeaderView \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QPushButton \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../hash/main_window.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o author.o ../hash/author.cpp
 
 demoform.o: ../hash/demoform.cpp ../hash/demoform.h \
@@ -2073,70 +2173,18 @@ demoform.o: ../hash/demoform.cpp ../hash/demoform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QTimer \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtimer.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
-		ui_demoform.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVariant \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QAction \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QButtonGroup \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGridLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGroupBox \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgroupbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHeaderView \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLineEdit \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlineedit.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextcursor.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextformat.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qpen.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QListWidget \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlistwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlistview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QPushButton \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QRadioButton \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qradiobutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QTabWidget \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QVBoxLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets/qwebengineview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qpainter.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtNetwork/qnetworkaccessmanager.h \
+		../hash/import.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QObject \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QFile \
+		../hash/hash.h \
+		ui_demoform.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets/QWebEnginePage \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets/qwebenginepage.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets/qtwebenginewidgetsglobal.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets/qwebenginecertificateerror.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineCore/qwebenginecallback.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineCore/qtwebenginecoreglobal.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtNetwork/qnetworkaccessmanager.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtNetwork/QSslConfiguration \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtNetwork/qsslconfiguration.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtNetwork/qsslsocket.h \
@@ -2154,12 +2202,6 @@ demoform.o: ../hash/demoform.cpp ../hash/demoform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QSharedDataPointer \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QMetaType \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets/qtwebenginewidgetsglobal.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets/qwebenginepage.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets/qwebenginecertificateerror.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineCore/qwebenginecallback.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineCore/qtwebenginecoreglobal.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWebEngineWidgets/QWebEnginePage \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/QtSql \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/QtSqlDepends \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtCore \
@@ -2193,8 +2235,10 @@ demoform.o: ../hash/demoform.cpp ../hash/demoform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtemporarydir.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QScopedPointer \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtemporaryfile.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractproxymodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qidentityproxymodel.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsortfilterproxymodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringlistmodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qjsonarray.h \
@@ -2202,7 +2246,10 @@ demoform.o: ../hash/demoform.cpp ../hash/demoform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qjsondocument.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qjsonobject.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmetaobject.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmimedata.h \
@@ -2212,6 +2259,7 @@ demoform.o: ../hash/demoform.cpp ../hash/demoform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsignalmapper.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsocketnotifier.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsystemsemaphore.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtimer.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtranslator.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qwineventnotifier.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmimedatabase.h \
@@ -2254,6 +2302,7 @@ demoform.o: ../hash/demoform.cpp ../hash/demoform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlinkedlist.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmessageauthenticationcode.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qqueue.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qscopedvaluerollback.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstack.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtextboundaryfinder.h \
@@ -2275,10 +2324,26 @@ demoform.o: ../hash/demoform.cpp ../hash/demoform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlquerymodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlrelationaldelegate.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qitemdelegate.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlistview.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlrelationaltablemodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqltablemodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qtsqlversion.h
+		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qtsqlversion.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDir
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o demoform.o ../hash/demoform.cpp
 
 dialogfio.o: ../hash/dialogfio.cpp ../hash/dialogfio.h \
@@ -2388,57 +2453,6 @@ dialogfio.o: ../hash/dialogfio.cpp ../hash/dialogfio.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		ui_dialogfio.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVariant \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QAction \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QButtonGroup \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGridLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHeaderView \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLabel \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlabel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLineEdit \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlineedit.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextcursor.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextformat.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qpen.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QPushButton \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QSpacerItem \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QVBoxLayout \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialogfio.o ../hash/dialogfio.cpp
@@ -2549,58 +2563,7 @@ fio.o: ../hash/fio.cpp ../hash/fio.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_fio.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVariant \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QAction \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QButtonGroup \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGridLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHeaderView \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLabel \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlabel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLineEdit \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlineedit.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextcursor.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextformat.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qpen.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QPushButton \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QSpacerItem \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QVBoxLayout
+		ui_fio.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fio.o ../hash/fio.cpp
 
 historyform.o: ../hash/historyform.cpp ../hash/historyform.h \
@@ -2709,55 +2672,6 @@ historyform.o: ../hash/historyform.cpp ../hash/historyform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		ui_historyform.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVariant \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QAction \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QButtonGroup \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGridLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGroupBox \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgroupbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHeaderView \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLabel \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlabel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QPushButton \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QSpacerItem \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QTableWidget \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtablewidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtableview.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/QtSql \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/QtSqlDepends \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtCore \
@@ -2793,8 +2707,10 @@ historyform.o: ../hash/historyform.cpp ../hash/historyform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtemporarydir.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QScopedPointer \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtemporaryfile.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractproxymodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qidentityproxymodel.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsortfilterproxymodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringlistmodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qjsonarray.h \
@@ -2802,8 +2718,10 @@ historyform.o: ../hash/historyform.cpp ../hash/historyform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qjsondocument.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qjsonobject.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmetaobject.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmimedata.h \
@@ -2857,6 +2775,7 @@ historyform.o: ../hash/historyform.cpp ../hash/historyform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlinkedlist.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmessageauthenticationcode.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qqueue.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qscopedvaluerollback.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstack.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtextboundaryfinder.h \
@@ -2878,7 +2797,21 @@ historyform.o: ../hash/historyform.cpp ../hash/historyform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlquerymodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlrelationaldelegate.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qitemdelegate.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlistview.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlrelationaltablemodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqltablemodel.h \
@@ -3045,9 +2978,10 @@ main_window.o: ../hash/main_window.cpp ../hash/main_window.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmdisubwindow.h \
 		../hash/theoryform.h \
 		../hash/demoform.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QTimer \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtimer.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
+		../hash/import.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QObject \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QFile \
+		../hash/hash.h \
 		../hash/testform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/QSqlQuery \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlquery.h \
@@ -3057,7 +2991,6 @@ main_window.o: ../hash/main_window.cpp ../hash/main_window.h \
 		../hash/dialogfio.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QDialog \
 		../hash/sql.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QObject \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/QSqlDatabase \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDir \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qdir.h \
@@ -3243,70 +3176,19 @@ testform.o: ../hash/testform.cpp ../hash/testform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsql.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqldatabase.h \
 		ui_testform.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVariant \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QAction \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QButtonGroup \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGridLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGroupBox \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgroupbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHeaderView \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QProgressBar \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qprogressbar.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QPushButton \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QRadioButton \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qradiobutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QTextBrowser \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtextbrowser.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtextedit.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextdocument.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextcursor.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextformat.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qpen.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QVBoxLayout \
 		../hash/main_window.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QDateTime \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qdatetime.h
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qdatetime.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QRadioButton \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qradiobutton.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o testform.o ../hash/testform.cpp
 
 theoryform.o: ../hash/theoryform.cpp ../hash/theoryform.h \
@@ -3415,54 +3297,6 @@ theoryform.o: ../hash/theoryform.cpp ../hash/theoryform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		ui_theoryform.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QVariant \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QAction \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QButtonGroup \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QGridLayout \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHeaderView \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qheaderview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QPushButton \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/QTextBrowser \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtextbrowser.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtextedit.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextdocument.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextoption.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextcursor.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qtextformat.h \
-		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qpen.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/QtSql \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/QtSqlDepends \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QtCore \
@@ -3498,8 +3332,10 @@ theoryform.o: ../hash/theoryform.cpp ../hash/theoryform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtemporarydir.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QScopedPointer \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtemporaryfile.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractproxymodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qidentityproxymodel.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsortfilterproxymodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringlistmodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qjsonarray.h \
@@ -3507,8 +3343,10 @@ theoryform.o: ../hash/theoryform.cpp ../hash/theoryform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qjsondocument.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qjsonobject.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmath.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmetaobject.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmimedata.h \
@@ -3562,6 +3400,7 @@ theoryform.o: ../hash/theoryform.cpp ../hash/theoryform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlinkedlist.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmessageauthenticationcode.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qqueue.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qscopedvaluerollback.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstack.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtextboundaryfinder.h \
@@ -3583,12 +3422,146 @@ theoryform.o: ../hash/theoryform.cpp ../hash/theoryform.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlquerymodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlrelationaldelegate.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qitemdelegate.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlistview.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtWidgets/qcombobox.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqlrelationaltablemodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qsqltablemodel.h \
 		../../../Qt5.6.0/5.6/gcc_64/include/QtSql/qtsqlversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o theoryform.o ../hash/theoryform.cpp
+
+hash.o: ../hash/hash.cpp ../hash/hash.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QObject \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfeatures.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobject_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o hash.o ../hash/hash.cpp
+
+import.o: ../hash/import.cpp ../hash/import.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QObject \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfeatures.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/QFile \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfile.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qfiledevice.h \
+		../../../Qt5.6.0/5.6/gcc_64/include/QtCore/qiodevice.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o import.o ../hash/import.cpp
 
 moc_author.o: moc_author.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_author.o moc_author.cpp
@@ -3616,6 +3589,12 @@ moc_testform.o: moc_testform.cpp
 
 moc_theoryform.o: moc_theoryform.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_theoryform.o moc_theoryform.cpp
+
+moc_hash.o: moc_hash.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_hash.o moc_hash.cpp
+
+moc_import.o: moc_import.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_import.o moc_import.cpp
 
 ####### Install
 

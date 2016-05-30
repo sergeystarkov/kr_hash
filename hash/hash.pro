@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     main_window.cpp \
     sql.cpp \
     testform.cpp \
-    theoryform.cpp
+    theoryform.cpp \
+    hash.cpp \
+    import.cpp
 
 HEADERS  += \
     author.h \
@@ -32,7 +34,9 @@ HEADERS  += \
     main_window.h \
     sql.h \
     testform.h \
-    theoryform.h
+    theoryform.h \
+    hash.h \
+    import.h
 
 FORMS    += mainwindow.ui \
     author.ui \
