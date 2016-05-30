@@ -36,6 +36,4 @@ void demoForm::on_genHash_clicked()
 {
     hashFoo.generateBadHASH(&hashFoo.array);    //генерирует хеш таблицу по плохому алгоритму
     hashFoo.generateGoodHASH(&hashFoo.array);   //генерирует хеш таблицу по хорошему алгоритму
-
-    ui->textBrowser->append(hashFoo.array.at(hashFoo.hashBad[15].index));//работает!!!
 }
