@@ -13,7 +13,8 @@ bool import::loadFromFile(QString path, QVector<QString> *array)
     if (!file.open(QIODevice::ReadOnly))
         return false;
     while(!file.atEnd()){
-        array->append(file.readLine());
+        QString str = file.readLine();
+        array->append(str);
     }
     file.close();
     return true;
