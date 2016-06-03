@@ -14,6 +14,7 @@ bool import::loadFromFile(QString path, QVector<QString> *array)
         return false;
     while(!file.atEnd()){
         QString str = file.readLine();
+        str = str.simplified();
         array->append(str);
     }
     file.close();

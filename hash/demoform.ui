@@ -38,6 +38,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="genHash">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Создать  хеш таблицу</string>
            </property>
@@ -59,10 +62,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="searchLine">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="search">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Поиск</string>
          </property>
@@ -75,9 +85,21 @@
    <item row="2" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="statusbar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -96,6 +118,24 @@
      </item>
      <item>
       <widget class="QProgressBar" name="progressBar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <property name="value">
         <number>24</number>
        </property>
@@ -131,16 +171,12 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="text">
-          <string>PushButton</string>
+        <widget class="QPushButton" name="addWord">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_4">
          <property name="text">
-          <string>PushButton</string>
+          <string>Добавить слово</string>
          </property>
         </widget>
        </item>
