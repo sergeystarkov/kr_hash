@@ -31,7 +31,6 @@ private:
     void checkOtv(int otv);
     void nextQuestion();
 
-
 signals:
     void  messageBox(QString);
     void blockWindow(bool);

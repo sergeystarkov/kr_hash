@@ -28,6 +28,7 @@ private:
 
 private slots:
     void slot_timer();
+    void on_exit_clicked();
 };
 
 #endif // AUTHOR_H

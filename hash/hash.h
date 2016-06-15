@@ -21,14 +21,13 @@ private:
     static unsigned const int sizeArray = 1000000; //размер массива для hash таблицы
     void clearHashTable(list (&hashT)[sizeArray]);
 
-
 signals:
     void stat(int current, int end);
 
 public:
     explicit hash(QObject *parent = 0);
 
-        //Массив слов (база данных или исходный массив данных) для которого нужно составить hash таблицу
+    //Массив слов (база данных или исходный массив данных) для которого нужно составить hash таблицу
     QVector<QString> array;
 
     //массивы индексов Hash функции
@@ -40,7 +39,6 @@ public:
     void writeHashTable(list *current, int index);
 
     int collision = 0;
-
     int values = 0;
 
     void generateBadHASH(QVector<QString> *array);
@@ -51,8 +49,6 @@ public:
 
     int searchBadHash(QString str);
     int searchGoodHash(QString str);
-
-
 };
 
 #endif // HASH_H

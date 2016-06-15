@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>412</width>
+    <height>131</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>О программе</string>
   </property>
   <widget class="QPushButton" name="start">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>442</y>
+     <y>90</y>
      <width>281</width>
      <height>31</height>
     </rect>
@@ -26,17 +26,30 @@
     <string>Нажмите для продолжения</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="exit">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>440</y>
-     <width>75</width>
-     <height>23</height>
+     <x>300</x>
+     <y>90</y>
+     <width>101</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>Выход</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>391</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

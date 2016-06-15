@@ -16,7 +16,6 @@ SOURCES += main.cpp\
     author.cpp \
     demoform.cpp \
     dialogfio.cpp \
-    fio.cpp \
     historyform.cpp \
     main_window.cpp \
     sql.cpp \
@@ -29,7 +28,6 @@ HEADERS  += \
     author.h \
     demoform.h \
     dialogfio.h \
-    fio.h \
     historyform.h \
     main_window.h \
     sql.h \
@@ -38,11 +36,10 @@ HEADERS  += \
     hash.h \
     import.h
 
-FORMS    += mainwindow.ui \
-    author.ui \
+FORMS    += author.ui \
     demoform.ui \
     dialogfio.ui \
-    fio.ui \
     historyform.ui \
     testform.ui \
-    theoryform.ui
+    theoryform.ui \
+    main_window.ui

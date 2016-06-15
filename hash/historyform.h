@@ -17,7 +17,6 @@ public:
 
 private slots:
     void on_refresh_clicked();
-
     void on_close_clicked();
 
 private:

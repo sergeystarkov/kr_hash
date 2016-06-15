@@ -53,20 +53,28 @@ void demoForm::on_genHash_clicked()
     hashFoo.generateBadHASH(&hashFoo.array);    //генерирует хеш таблицу по плохому алгоритму
 
     ui->textBrowser->append("Число коллизий BadHash:");
-    ui->textBrowser->append(QString::number(hashFoo.collision));
+    int colBadHash = hashFoo.collision;
+    ui->textBrowser->append(QString::number(colBadHash));
 
 
     ui->statusbar->setText("Генерируется хеш-таблица по хорошему алгоритму");
     hashFoo.generateGoodHASH(&hashFoo.array);   //генерирует хеш таблицу по хорошему алгоритму
 
     ui->textBrowser->append("Число коллизий GoodHash");
-    ui->textBrowser->append(QString::number(hashFoo.collision));
+    int colGoodHash = hashFoo.collision;
+    ui->textBrowser->append(QString::number(colGoodHash));
 
-    ui->statusbar->setText("Все-хеш-таблицы сгенерированы");
+
+    ui->statusbar->setText("Все-хеш-таблицы сгенерированы. Воспользуйтесь поиском");
 
     ui->textBrowser->append("Всего слов:");
     ui->textBrowser->append(QString::number(hashFoo.values));
 
+    QString str = "drawChart('Колличество коллизий','Всего слов','Плохое хеширование','Хорошее хеширование',"+
+            QString::number(hashFoo.values)+","+
+            QString::number(colBadHash)+","+
+            QString::number(colGoodHash)+");";
+    ui->web->page()->runJavaScript(str);
 }
 
 void demoForm::on_search_clicked()
@@ -103,7 +111,7 @@ void demoForm::search(QString str)
     //Стоп таймера
     searchResult[0][1] = timer.elapsed();
     searchResult[0][0] = index;
-
+    ui->textBrowser->append(QString::number(searchResult[0][1])+"ms x1000");
     /////////////////////////////////////////////////////////
 
 
@@ -121,6 +129,7 @@ void demoForm::search(QString str)
     //Стоп таймера
     searchResult[1][1] = timer.elapsed();
     searchResult[1][0] = index;
+    ui->textBrowser->append(QString::number(searchResult[1][1])+"ms x1000");
     /////////////////////////////////////////////////////////
 
 
@@ -138,7 +147,21 @@ void demoForm::search(QString str)
     //Стоп таймера
     searchResult[2][1] = timer.elapsed();
     searchResult[2][0] = index;
+    ui->textBrowser->append(QString::number(searchResult[2][1])+"ms /1000");
     /////////////////////////////////////////////////////////
+
+
+    double all,bad,good;
+    all = searchResult[0][1]/1000;
+    bad = searchResult[1][1]/1000;
+    good = searchResult[2][1]/1000;
+
+    QString js = "drawChart('Скорость поиска в мс','Линейным перебором','Используя плохой хеш','Используя хороший хеш',"+
+            QString::number(all)+","+
+            QString::number(bad)+","+
+            QString::number(good)+");";
+
+    ui->web->page()->runJavaScript(js);
 }
 
 void demoForm::loadHtml()
@@ -152,10 +175,8 @@ void demoForm::on_searchLine_textEdited(const QString &arg1)
     if(arg1 != "")
     {
         ui->search->setEnabled(true);
-        ui->addWord->setEnabled(true);
     }
     else {
         ui->search->setEnabled(false);
-        ui->addWord->setEnabled(false);
     }
 }

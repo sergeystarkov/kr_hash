@@ -11,14 +11,11 @@ testForm::testForm(QWidget *parent) :
     ui->setupUi(this);
     correctCurrentAnswer = 0;
     currentAnswer = 0;
-    //loadQuestions();
-
 }
 
 testForm::~testForm()
 {
     emit blockWindow(true);
-    //this->deleteLater();
     parent()->deleteLater();
     delete ui;
 }
@@ -31,11 +28,11 @@ void testForm::loadQuestions()
     while(query_num.next()){
         questCount++;
     }
-    for(int i = 0; i < changeTest-1; i++){
+    for(int i = 0; i < changeTest; i++){
         do {//Генерируем случайные номера вопросов
             bool repited = false;
             int n = qrand()%questCount+1;
-            for(int y = 0; y < changeTest-1; y++){
+            for(int y = 0; y < changeTest; y++){
                 if(n == numTest[y][0]){
                     repited = true;
                     break;
@@ -50,7 +47,7 @@ void testForm::loadQuestions()
 }
 
 void testForm::openQuestion(int n)
-{ui->send->setText(QString::number(currentAnswer));
+{
     QSqlQuery query("SELECT "
                     "question, "
                     "first_possible_answer,"
@@ -128,20 +125,22 @@ void testForm::results()
     m.exec();
     this->deleteLater();
     parent()->deleteLater();
-
 }
 
 
 
 void testForm::nextQuestion()
-{   ui->otv1Button->setChecked(false);
-    if(currentAnswer <= changeTest){
-
+{   //ui->otv1Button->setChecked(false);
+    if((currentAnswer +1) < changeTest)
+    {
         currentAnswer++;
-        //ui->progress->setValue(currentAnswer);
+        ui->progress->setValue(currentAnswer);
         openQuestion(currentAnswer);
     }
-    else results();
+    else
+    {
+        results();
+    }
 }
 
 void testForm::testing()

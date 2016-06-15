@@ -14,7 +14,7 @@ signals:
 
 public slots:
     bool loadFromFile(QString path, QVector<QString> *array); //Записывает массив из файла
-//    bool loadFromFile(QString path, QString *array); //Записывает массив из файла
+
 };
 
 #endif // IMPORT_H

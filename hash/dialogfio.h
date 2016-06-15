@@ -19,10 +19,8 @@ public:
     QString gr;
 
 private slots:
-    void on_buttonBox_accepted();
 
     void on_ok_clicked();
-
     void on_cansel_clicked();
 
 private:

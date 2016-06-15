@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Демонстрация работы хеш-функции</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -170,16 +170,6 @@
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
-       <item>
-        <widget class="QPushButton" name="addWord">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Добавить слово</string>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="QTextBrowser" name="textBrowser">
          <property name="sizePolicy">

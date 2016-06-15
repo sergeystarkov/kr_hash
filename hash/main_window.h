@@ -15,20 +15,17 @@ public:
     explicit main_window(QWidget *parent = 0);
     ~main_window();
 
-
-
 private:
     Ui::main_window *ui;
     void loadSubWindow(QWidget *widget);
-private slots:
-    void message(QString str);
 
 private slots:
+    void message(QString str);
     void slot_theory();
     void slot_demo();
     void slot_test();
     void slot_history();
-    void on_action_base_triggered();
+    void slot_exit();
 
     void blockWindow(bool);
 };

@@ -6,18 +6,11 @@ dialogFIO::dialogFIO(QWidget *parent) :
     ui(new Ui::dialogFIO)
 {
     ui->setupUi(this);
-    //connect(this,SIGNAL(accepted()),this,SLOT(on_buttonBox_accepted()));
 }
 
 dialogFIO::~dialogFIO()
 {
     delete ui;
-}
-
-
-void dialogFIO::on_buttonBox_accepted()
-{
-
 }
 
 void dialogFIO::on_ok_clicked()

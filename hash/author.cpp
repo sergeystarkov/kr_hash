@@ -11,6 +11,9 @@ author::author(QWidget *parent) :
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(slot_timer()));
     timer->start(1000);
+
+    QPixmap pix("autor.png");
+    ui->label->setPixmap(pix);
 }
 
 author::~author()
@@ -33,4 +36,9 @@ void author::on_start_clicked()
     main_window *mw = new main_window();
     mw->show();
     this->close();
+}
+
+void author::on_exit_clicked()
+{
+    qApp->exit();
 }

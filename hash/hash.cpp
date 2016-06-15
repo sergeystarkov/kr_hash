@@ -85,7 +85,6 @@ int hash::badHash(QString str)
     if(str != "")//Если строка не пустая
     {
         //хеш функция
-        //сложение первого и последнего символа и деление с остатком
         int hashKey = 0;
         int len = str.length();
 
@@ -124,6 +123,7 @@ void hash::generateGoodHASH(QVector<QString> *array)
         emit stat(status,array->size());
     }
 }
+
 int hash::goodHash(QString str)
 {
     if(str != "")//Если строка не пустая
